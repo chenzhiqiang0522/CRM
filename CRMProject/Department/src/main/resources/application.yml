@@ -1,10 +1,12 @@
 server:
   port: 8081
 spring:
+  application:
+    name: ronghua-crm
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql:///crm
     username: root
     password: 123456
 mybatis:
-  type-aliases-package: org.nickwiber.domain
+  type-aliases-package: org.chenzhiqiang.domain
