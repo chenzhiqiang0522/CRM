@@ -5,7 +5,6 @@ import lombok.*;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Department {

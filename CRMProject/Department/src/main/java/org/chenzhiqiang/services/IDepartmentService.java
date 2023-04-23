@@ -10,4 +10,5 @@ public interface IDepartmentService {
     Integer deleteDepartmentByName(String depname);
     Integer deleteDepartmentById(Long id);
     Long addDepartment(Department department);
+    Integer modifyDepartment(Department department);
 }

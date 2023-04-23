@@ -39,4 +39,9 @@ public class DepartmentServiceImplTest extends BaseTest {
     public void deleteDepartmentById() {
         Integer integer = departmentService.deleteDepartmentById(52L);
     }
+
+    @Test
+    public void modifyDepartment() {
+        departmentService.modifyDepartment(new Department("utils22", "2222222222222222"));
+    }
 }

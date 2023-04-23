@@ -1,16 +1,20 @@
 package org.chenzhiqiang.utils;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class ReturnResult {
     private Boolean isSuccess = true;
     private String msg = "执行成功";
-    private Object resultObj = null;
+    private Object resultObj;
+
+    @Override
+    public String toString() {
+        return "ReturnResult{" +
+                "isSuccess=" + isSuccess +
+                ", msg='" + msg + '\'' +
+                ", resultObj=" + resultObj +
+                '}';
+    }
 
     public Boolean getSuccess() {
         return isSuccess;
@@ -36,5 +40,12 @@ public class ReturnResult {
         this.resultObj = resultObj;
     }
 
+    public ReturnResult(Boolean isSuccess, String msg, Object resultObj) {
+        this.isSuccess = isSuccess;
+        this.msg = msg;
+        this.resultObj = resultObj;
+    }
 
+    public ReturnResult() {
+    }
 }

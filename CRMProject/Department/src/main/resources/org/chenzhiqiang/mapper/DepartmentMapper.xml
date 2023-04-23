@@ -32,6 +32,17 @@
                                              #{path},
                                              #{state})
     </insert>
+    <update id="modifyDepartment">
+        UPDATE t_org_department SET `name`=#{name},
+                                    `intro`=#{intro},
+                                    `create_time`=#{createTime},
+                                    `update_time`=#{updateTime},
+                                    `manager_id`=#{managerId},
+                                    `parent_id`=#{parentId},
+                                    `path`=#{path},
+                                    `state`=#{state}
+        WHERE id = 53
+    </update>
     <delete id="deleteByName">
         DELETE FROM t_org_department WHERE name = #{name}
     </delete>

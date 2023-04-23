@@ -42,4 +42,10 @@ public class DepartmentMapperTest extends BaseTest {
         Integer integer = departmentMapper.deleteById(50L);
         System.out.println("执行结果为"+integer);
     }
+
+    @Test
+    public void modifyDepartment() {
+        Department department = new Department("utils1", "11111111111");
+        departmentMapper.modifyDepartment(department);
+    }
 }

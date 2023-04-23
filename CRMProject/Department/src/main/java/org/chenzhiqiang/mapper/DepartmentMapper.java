@@ -12,5 +12,6 @@ public interface DepartmentMapper {
     Integer deleteByName(String depname);
     Integer deleteById(Long id);
     Long addDepartment(Department department);
+    Integer modifyDepartment(Department department);
 
 }
