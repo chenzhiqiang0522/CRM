@@ -3,7 +3,7 @@ package org.chenzhiqiang.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.chenzhiqiang.domain.Department;
-import org.chenzhiqiang.services.IDepartmentService;
+import org.chenzhiqiang.domain.DepartmentQueryObject;
 import org.chenzhiqiang.services.impl.DepartmentServiceImpl;
 import org.chenzhiqiang.utils.ReturnResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,4 +111,11 @@ public class DepartmentController {
             return errorMethod(e,returnResult);
         }
     }
+
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnResult pageList(@RequestBody DepartmentQueryObject queryObject){
+
+    }
+
 }

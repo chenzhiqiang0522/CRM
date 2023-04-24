@@ -1,6 +1,7 @@
 package org.chenzhiqiang.services.impl;
 
 import org.chenzhiqiang.domain.Department;
+import org.chenzhiqiang.domain.DepartmentQueryObject;
 import org.chenzhiqiang.mapper.DepartmentMapper;
 import org.chenzhiqiang.services.IDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,11 @@ public class DepartmentServiceImpl implements IDepartmentService {
     public Integer modifyDepartment(Department department) {
         Integer integer = departmentMapper.modifyDepartment(department);
         return integer;
+    }
+
+    @Override
+    public List<Department> pageList(DepartmentQueryObject queryObject) {
+
+        return null;
     }
 }

@@ -63,4 +63,10 @@
         t_org_department
         WHERE id = #{id}
     </select>
+    <select id="seletByQueryObjec" resultType="Department">
+        select
+            <include refid="baseColum" />
+            from t_org_department
+        where
+    </select>
 </mapper>
