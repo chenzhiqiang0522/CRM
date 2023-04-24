@@ -120,11 +120,13 @@ public class DepartmentController {
         PageList<Department> departmentPageList = new PageList<>();
         ReturnResult returnResult = new ReturnResult();
         try {
-            List<Department> departments = departmentServiceImpl.pageList(queryObject);
+            List<Department> departments = departmentServiceImpl.getAllDepartments();
             departmentPageList.setTotal(departments.size());
-            departmentPageList.setRows(departments);
+            departmentPageList.setRows(departmentServiceImpl.pageList(queryObject));
             returnResult.setResultObj(departmentPageList);
             System.out.println(departments);
+            System.out.println("===============================");
+            System.out.println(departmentPageList.getRows());
             return returnResult;
         } catch (Exception e) {
             return errorMethod(e,returnResult);

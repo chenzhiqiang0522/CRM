@@ -57,6 +57,7 @@ public class DepartmentServiceImpl implements IDepartmentService {
     @Override
     public List<Department> pageList(DepartmentQueryObject queryObject) {
         List<Department> departments = departmentMapper.seletByQueryObjec(queryObject);
+        System.out.println("pagelist的结果"+departments);
         return departments;
     }
 }
