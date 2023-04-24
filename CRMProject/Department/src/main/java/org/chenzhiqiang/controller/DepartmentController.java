@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.chenzhiqiang.domain.Department;
 import org.chenzhiqiang.domain.DepartmentQueryObject;
 import org.chenzhiqiang.services.impl.DepartmentServiceImpl;
+import org.chenzhiqiang.utils.PageList;
 import org.chenzhiqiang.utils.ReturnResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,7 +91,7 @@ public class DepartmentController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST,value = "/add")
     @ApiOperation(value = "通过增加和修改部门信息" )
     public ReturnResult addAndModifyDepartment(@RequestBody Department department){
         System.out.println(department);
@@ -112,10 +113,22 @@ public class DepartmentController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST,value = "/pageList")
     @ResponseBody
     public ReturnResult pageList(@RequestBody DepartmentQueryObject queryObject){
-
+        System.out.println(queryObject);
+        PageList<Department> departmentPageList = new PageList<>();
+        ReturnResult returnResult = new ReturnResult();
+        try {
+            List<Department> departments = departmentServiceImpl.pageList(queryObject);
+            departmentPageList.setTotal(departments.size());
+            departmentPageList.setRows(departments);
+            returnResult.setResultObj(departmentPageList);
+            System.out.println(departments);
+            return returnResult;
+        } catch (Exception e) {
+            return errorMethod(e,returnResult);
+        }
     }
 
 }

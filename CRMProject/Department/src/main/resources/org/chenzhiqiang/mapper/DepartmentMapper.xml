@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.chenzhiqiang.mapper.DepartmentMapper">
     <resultMap id="departmentMap" type="Department">
-        <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="intro" property="intro" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="manager_id" property="managerId" />
-        <result column="parent_id" property="parentId" />
-        <result column="path" property="path" />
-        <result column="state" property="state" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="intro" property="intro"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="manager_id" property="managerId"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="path" property="path"/>
+        <result column="state" property="state"/>
     </resultMap>
     <sql id="baseColum">
         `id`,`name`,`intro`,`create_time`,`update_time`,`manager_id`,`parent_id`,`path`,`state`
@@ -23,31 +23,37 @@
                                      `manager_id`,
                                      `parent_id`,
                                      `path`,
-                                     `state`) VALUES (#{name},
-                                             #{intro},
-                                             #{createTime},
-                                             #{updateTime},
-                                             #{managerId},
-                                             #{parentId},
-                                             #{path},
-                                             #{state})
+                                     `state`)
+        VALUES (#{name},
+                #{intro},
+                #{createTime},
+                #{updateTime},
+                #{managerId},
+                #{parentId},
+                #{path},
+                #{state})
     </insert>
     <update id="modifyDepartment">
-        UPDATE t_org_department SET `name`=#{name},
-                                    `intro`=#{intro},
-                                    `create_time`=#{createTime},
-                                    `update_time`=#{updateTime},
-                                    `manager_id`=#{managerId},
-                                    `parent_id`=#{parentId},
-                                    `path`=#{path},
-                                    `state`=#{state}
+        UPDATE t_org_department
+        SET `name`=#{name},
+            `intro`=#{intro},
+            `create_time`=#{createTime},
+            `update_time`=#{updateTime},
+            `manager_id`=#{managerId},
+            `parent_id`=#{parentId},
+            `path`=#{path},
+            `state`=#{state}
         WHERE id = 53
     </update>
     <delete id="deleteByName">
-        DELETE FROM t_org_department WHERE name = #{name}
+        DELETE
+        FROM t_org_department
+        WHERE name = #{name}
     </delete>
     <delete id="deleteById">
-        DELETE FROM t_org_department WHERE id = #{id}
+        DELETE
+        FROM t_org_department
+        WHERE id = #{id}
     </delete>
 
     <select id="selectAll" resultMap="departmentMap">
@@ -63,10 +69,17 @@
         t_org_department
         WHERE id = #{id}
     </select>
+    <sql id="whereCondition">
+        <where>
+            <if test="keyword != null and keyword != ''">
+                name like concat('%',#{keyword},'%') or intro like concat('%',#{keyword},'%')
+            </if>
+        </where>
+    </sql>
     <select id="seletByQueryObjec" resultType="Department">
-        select
-            <include refid="baseColum" />
-            from t_org_department
-        where
+        SELECT
+        <include refid="baseColum"/>
+        FROM t_org_department
+        <include refid="whereCondition" />
     </select>
 </mapper>

@@ -56,7 +56,7 @@ public class DepartmentServiceImpl implements IDepartmentService {
 
     @Override
     public List<Department> pageList(DepartmentQueryObject queryObject) {
-
-        return null;
+        List<Department> departments = departmentMapper.seletByQueryObjec(queryObject);
+        return departments;
     }
 }
