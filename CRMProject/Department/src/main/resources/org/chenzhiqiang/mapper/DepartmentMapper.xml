@@ -81,7 +81,7 @@
     <sql id="whereCondition">
         <where>
             <if test="keyword != null and keyword != ''">
-                name like concat('%',#{keyword},'%') or intro like concat('%',#{keyword},'%')
+                c.name like concat('%',#{keyword},'%') or c.intro like concat('%',#{keyword},'%')
             </if>
         </where>
     </sql>
