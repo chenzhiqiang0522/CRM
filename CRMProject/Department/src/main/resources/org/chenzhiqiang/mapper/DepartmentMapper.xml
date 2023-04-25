@@ -85,7 +85,7 @@
             </if>
         </where>
     </sql>
-
+    <!--             高级查询               -->
     <select id="seletByQueryObjec" resultMap="departmentMap">
         SELECT
         c.*,
@@ -95,7 +95,19 @@
         t_org_department c
         LEFT JOIN t_org_employee e ON c.manager_id = e.id
         LEFT JOIN t_org_department p on c.parent_id = p.id
-        <include refid="whereCondition" />
+        <include refid="whereCondition"/>
         limit #{start},#{pageSize}
     </select>
+    <!--  批量删除  -->
+    <delete id="patchDelete">
+        delete
+        from t_org_department
+        where id in
+    </delete>
+    <delete id="patchDeleteDepartments">
+        delete from t_org_department where id in
+        <foreach collection="list" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

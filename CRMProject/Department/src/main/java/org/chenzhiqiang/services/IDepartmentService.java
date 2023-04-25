@@ -3,6 +3,7 @@ package org.chenzhiqiang.services;
 import org.chenzhiqiang.domain.Department;
 import org.chenzhiqiang.domain.DepartmentQueryObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface IDepartmentService {
@@ -13,4 +14,6 @@ public interface IDepartmentService {
     Long addDepartment(Department department);
     Integer modifyDepartment(Department department);
     List<Department> pageList(DepartmentQueryObject queryObject);
+
+    Integer patchDeleteDepartments(ArrayList<Long> ids);
 }

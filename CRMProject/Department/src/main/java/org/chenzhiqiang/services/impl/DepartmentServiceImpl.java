@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 @Transactional(readOnly = true,propagation = Propagation.SUPPORTS)
@@ -57,7 +58,13 @@ public class DepartmentServiceImpl implements IDepartmentService {
     @Override
     public List<Department> pageList(DepartmentQueryObject queryObject) {
         List<Department> departments = departmentMapper.seletByQueryObjec(queryObject);
-        System.out.println("pagelist的结果"+departments);
+//        System.out.println("pagelist的结果"+departments);
         return departments;
+    }
+
+    @Override
+    public Integer patchDeleteDepartments(ArrayList<Long> ids) {
+        Integer returnInteger = departmentMapper.patchDeleteDepartments(ids);
+        return returnInteger;
     }
 }

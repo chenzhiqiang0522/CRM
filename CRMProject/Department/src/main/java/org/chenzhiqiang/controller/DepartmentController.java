@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -69,7 +70,7 @@ public class DepartmentController {
     @ResponseBody
     @ApiOperation(value = "通过ID或者名字删除部门信息")
     public ReturnResult deleteDepartmentById(@PathVariable("id") Long id) {
-        System.out.println(id);
+//        System.out.println(id);
         ReturnResult returnResult = new ReturnResult();
         Integer changedRowNumber = 0;
         try {
@@ -89,7 +90,7 @@ public class DepartmentController {
     @RequestMapping(method = RequestMethod.POST, value = "/add")
     @ApiOperation(value = "通过增加和修改部门信息")
     public ReturnResult addAndModifyDepartment(@RequestBody Department department) {
-        System.out.println(department);
+//        System.out.println(department);
         ReturnResult returnResult = new ReturnResult();
         Number changedRowNumber = null;
         try {
@@ -119,13 +120,27 @@ public class DepartmentController {
             departmentPageList.setTotal(departments.size());
             departmentPageList.setRows(departmentServiceImpl.pageList(queryObject));
             returnResult.setResultObj(departmentPageList);
-            System.out.println(departments);
-            System.out.println("===============================");
-            System.out.println(departmentPageList.getRows());
+//            System.out.println(departments);
+//            System.out.println("===============================");
+//            System.out.println(departmentPageList.getRows());
             return returnResult;
         } catch (Exception e) {
             return errorMethod(e, returnResult);
         }
     }
 
+    @RequestMapping(method = RequestMethod.PATCH, value = "/patchDelete")
+    @ResponseBody
+    public ReturnResult patchDeleteDepartments(@RequestBody ArrayList<Long> ids){
+        ReturnResult returnResult = new ReturnResult();
+        System.out.println("批量删除参数"+ids);
+        Integer integer;
+        try {
+            integer = departmentServiceImpl.patchDeleteDepartments(ids);
+            returnResult.setMsg("批量删除了"+integer+"条数据");
+            return returnResult;
+        } catch (Exception e) {
+            return errorMethod(e, returnResult);
+        }
+    }
 }
