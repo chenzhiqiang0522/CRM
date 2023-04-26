@@ -48,4 +48,10 @@ public class DepartmentMapperTest extends BaseTest {
         Department department = new Department("utils1", "11111111111");
         departmentMapper.modifyDepartment(department);
     }
+
+    @Test
+    public void getChildDepartments() {
+        List<Department> childDepartments = departmentMapper.getChildDepartments();
+        System.out.println(childDepartments);
+    }
 }

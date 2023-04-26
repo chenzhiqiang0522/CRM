@@ -10,3 +10,5 @@ spring:
     password: 123456
 mybatis:
   type-aliases-package: org.chenzhiqiang.domain
+authority:
+  package: org.chenzhiqiang.controller

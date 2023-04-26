@@ -2,6 +2,7 @@ package org.chenzhiqiang.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.chenzhiqiang.authority.annotation.Authority;
 import org.chenzhiqiang.domain.Department;
 import org.chenzhiqiang.domain.DepartmentQueryObject;
 import org.chenzhiqiang.services.impl.DepartmentServiceImpl;
@@ -18,6 +19,7 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/Departments")
 @Api(value = "部门的接口", description = "部门相关的CRUD功能")
+@Authority(name = "部门管理")
 public class DepartmentController {
     @Autowired
     private DepartmentServiceImpl departmentServiceImpl;
@@ -34,6 +36,7 @@ public class DepartmentController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(value = "查询全部部门")
+    @Authority(name = "获取全部部门")
     public ReturnResult getAll() {
         ReturnResult returnResult = new ReturnResult();
         List<Department> allDepartment = null;
@@ -50,6 +53,7 @@ public class DepartmentController {
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     @ResponseBody
     @ApiOperation(value = "通过ID查询部门信息")
+    @Authority(name = "通过ID查询部门信息")
     public ReturnResult getDepartmentByID(@PathVariable("id") Long id) {
         ReturnResult returnResult = new ReturnResult();
         try {
@@ -68,7 +72,8 @@ public class DepartmentController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     @ResponseBody
-    @ApiOperation(value = "通过ID或者名字删除部门信息")
+    @ApiOperation(value = "通过ID删除部门信息")
+    @Authority(name = "通过ID删除部门信息")
     public ReturnResult deleteDepartmentById(@PathVariable("id") Long id) {
 //        System.out.println(id);
         ReturnResult returnResult = new ReturnResult();
@@ -88,7 +93,9 @@ public class DepartmentController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/add")
+    @ResponseBody
     @ApiOperation(value = "通过增加和修改部门信息")
+    @Authority(name = "增加和修改部门信息")
     public ReturnResult addAndModifyDepartment(@RequestBody Department department) {
 //        System.out.println(department);
         ReturnResult returnResult = new ReturnResult();
@@ -138,6 +145,18 @@ public class DepartmentController {
         try {
             integer = departmentServiceImpl.patchDeleteDepartments(ids);
             returnResult.setMsg("批量删除了"+integer+"条数据");
+            return returnResult;
+        } catch (Exception e) {
+            return errorMethod(e, returnResult);
+        }
+    }
+    @RequestMapping(method = RequestMethod.GET, value = "/departmentTree")
+    @ResponseBody
+    public ReturnResult getDepartmentTree(){
+        ReturnResult returnResult = new ReturnResult();
+        try {
+            List<Department> departmentsTree = departmentServiceImpl.getChildDepartments();
+            returnResult.setResultObj(departmentsTree);
             return returnResult;
         } catch (Exception e) {
             return errorMethod(e, returnResult);

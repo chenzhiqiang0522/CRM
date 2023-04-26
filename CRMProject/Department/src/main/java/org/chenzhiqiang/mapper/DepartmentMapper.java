@@ -10,13 +10,24 @@ import java.util.List;
 @Repository
 public interface DepartmentMapper {
     List<Department> selectAll();
+
     Department selectByID(Long id);
+    Department selectByPartentID(Long id);
+
     Integer deleteByName(String depname);
+
     Integer deleteById(Long id);
+
     Long addDepartment(Department department);
+
     Integer modifyDepartment(Department department);
-//    ================== 高级查询（通过关键字查询）=======================
+
+    //    ================== 高级查询（通过关键字查询）=======================
     List<Department> seletByQueryObjec(DepartmentQueryObject queryObject);
-//    ==================批量删除=======================
+
+    //    ==================批量删除=======================
     Integer patchDeleteDepartments(ArrayList<Long> ids);
+//   ===================查询父子部门====================
+    List<Department> getChildDepartments();
+
 }

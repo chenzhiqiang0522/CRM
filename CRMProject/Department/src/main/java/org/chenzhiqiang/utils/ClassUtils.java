@@ -1,0 +1,43 @@
+package org.chenzhiqiang.utils;
+
+import java.io.File;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ClassUtils {
+    /**
+     * 获取一个包下面的所有类全限定名
+     * @param packageNames 包
+     * @return
+     */
+    public static List<Class> getAllClassName(String packageNames){
+        String[] split = packageNames.split(",");   // 以,分割controller包路径
+        List<Class> result = new ArrayList<>();
+        for (String packageName : split) {
+            // 包相对路径
+            String packagePath = packageName.replace(".","/"); //把包路径中的点替换为目录
+            // 资源URL
+            URL url = ClassLoader.getSystemResource(""); //获取当前项目的classapth
+            File[] files = new File(url.getPath() + packagePath) //获取classapth+packagePath,就是完整的路径
+                    .listFiles(file -> file.getName().endsWith(".class"));
+            if(files == null || files.length < 1){
+                continue;
+            }
+            for(File file : files){
+                // 输出类名称
+                String fileName = file.getName();
+                // 获取controller的类名 DepartmentController.class
+                fileName = fileName.substring(0,fileName.lastIndexOf("."));
+                //全限定类名  cn.ronghuanet.org.controller.DepartmentController
+                String allName = packageName+"."+fileName;
+                try {
+                    result.add(Class.forName(allName));
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
+}

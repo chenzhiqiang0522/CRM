@@ -16,4 +16,5 @@ public interface IDepartmentService {
     List<Department> pageList(DepartmentQueryObject queryObject);
 
     Integer patchDeleteDepartments(ArrayList<Long> ids);
+    List<Department> getChildDepartments();
 }

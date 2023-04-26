@@ -6,7 +6,7 @@
     <sql id="baseColum">
         `id`,`name`,`intro`,`create_time`,`update_time`,`manager_id`,`parent_id`,`path`,`state`
     </sql>
-    <insert id="addDepartment" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addDepartment" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO t_org_department(`name`,
                                      `intro`,
                                      `create_time`,
@@ -19,8 +19,8 @@
                 #{intro},
                 #{createTime},
                 #{updateTime},
-                #{managerId},
-                #{parentId},
+                #{manager.id},
+                #{parent.id},
                 #{path},
                 #{state})
     </insert>
@@ -30,8 +30,8 @@
             `intro`=#{intro},
             `create_time`=#{createTime},
             `update_time`=#{updateTime},
-            `manager_id`=#{managerId},
-            `parent_id`=#{parentId},
+            `manager_id`=#{manager.id},
+            `parent_id`=#{parent.id},
             `path`=#{path},
             `state`=#{state}
         WHERE id = 53
@@ -63,6 +63,10 @@
             <id property="id" column="parent_id"></id>
             <result property="name" column="pname"></result>
         </association>
+        <collection property="childDepartments" ofType="Department">
+            <id column="cid" property="id" />
+            <result property="name" column="cname" />
+        </collection>
     </resultMap>
 
     <select id="selectAll" resultMap="departmentMap">
@@ -98,12 +102,24 @@
         <include refid="whereCondition"/>
         limit #{start},#{pageSize}
     </select>
+    <select id="selectByPartentID" resultMap="departmentMap">
+        select
+            <include refid="baseColum"></include>
+        from t_org_department where parent_id = #{id}
+    </select>
+    <select id="getChildDepartments" resultMap="departmentMap">
+        SELECT
+            p.id,
+            p.NAME,
+            c.id as cid,
+            c.`name` as cname
+        FROM
+            t_org_department p
+                LEFT JOIN t_org_department c ON p.id = c.parent_id
+        WHERE
+            p.parent_id IS NULL
+    </select>
     <!--  批量删除  -->
-    <delete id="patchDelete">
-        delete
-        from t_org_department
-        where id in
-    </delete>
     <delete id="patchDeleteDepartments">
         delete from t_org_department where id in
         <foreach collection="list" open="(" close=")" separator="," item="id">
