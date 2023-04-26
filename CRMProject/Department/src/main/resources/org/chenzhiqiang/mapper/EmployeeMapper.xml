@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.chenzhiqiang.mapper.EmployeeMapper">
+    <sql id="employeeColumns">
+        `username`,`password,`id`,`headImage`,`email`,`department_id`,`age`
+    </sql>
+    <resultMap id="employeeResultMap" type="Employee">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="email" column="email" />
+        <result property="headImage" column="headImage" />
+        <result property="age" column="age" />
+        <result property="departmentId" column="department_id" />
+    </resultMap>
+    <select id="selectAll" resultMap="employeeResultMap">
+        SELECT
+        <include refid="employeeColumns"/>
+        FROM t_org_employee
+    </select>
+</mapper>
