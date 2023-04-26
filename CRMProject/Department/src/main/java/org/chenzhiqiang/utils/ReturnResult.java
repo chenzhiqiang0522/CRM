@@ -1,7 +1,9 @@
 package org.chenzhiqiang.utils;
 
 import lombok.*;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ReturnResult {
     private Boolean isSuccess = true;
     private String msg = "执行成功";
