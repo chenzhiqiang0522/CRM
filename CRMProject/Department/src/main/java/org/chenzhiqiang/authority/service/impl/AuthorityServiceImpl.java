@@ -6,6 +6,7 @@ import org.chenzhiqiang.authority.domain.Permission;
 import org.chenzhiqiang.authority.mapper.PermissionMapper;
 import org.chenzhiqiang.authority.service.IAuthorityService;
 import org.chenzhiqiang.utils.ClassUtils;
+import org.chenzhiqiang.utils.QueryObj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -60,6 +61,12 @@ public class AuthorityServiceImpl implements IAuthorityService {
     @Override
     public List<Permission> getAllPermissions() {
         List<Permission> permissions = permissionMapper.selectAll();
+        return permissions;
+    }
+
+    @Override
+    public List<Permission> pageList(QueryObj queryObj) {
+        List<Permission> permissions = permissionMapper.selectByQueryObj(queryObj);
         return permissions;
     }
 

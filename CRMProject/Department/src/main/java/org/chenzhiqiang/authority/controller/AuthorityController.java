@@ -5,11 +5,11 @@ import io.swagger.annotations.ApiOperation;
 import org.chenzhiqiang.authority.annotation.Authority;
 import org.chenzhiqiang.authority.domain.Permission;
 import org.chenzhiqiang.authority.service.IAuthorityService;
+import org.chenzhiqiang.utils.PageList;
+import org.chenzhiqiang.utils.QueryObj;
 import org.chenzhiqiang.utils.ReturnResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,5 +43,18 @@ public class AuthorityController {
         } catch (Exception e) {
             return errorMethod(e,returnResult);
         }
+    }
+
+    @PostMapping("/pageList")
+    @ApiOperation(value = "权限高分页高级查询")
+    @Authority(name = "权限高分页高级查询",descs = "权限高分页高级查询")
+    public ReturnResult pageList(@RequestBody QueryObj queryObj){
+        PageList<Permission> permissionPageList = new PageList<>();
+        List<Permission> permissions = authorityServiceImpl.getAllPermissions();
+        permissionPageList.setTotal(permissions.size());
+        List<Permission> permissions1 = authorityServiceImpl.pageList(queryObj);
+        permissionPageList.setRows(permissions1);
+        returnResult.setResultObj(permissionPageList);
+        return returnResult;
     }
 }

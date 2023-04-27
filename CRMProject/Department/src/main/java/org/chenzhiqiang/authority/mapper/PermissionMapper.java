@@ -1,6 +1,7 @@
 package org.chenzhiqiang.authority.mapper;
 
 import org.chenzhiqiang.authority.domain.Permission;
+import org.chenzhiqiang.utils.QueryObj;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +13,6 @@ public interface PermissionMapper {
     void deleteAll();
 
     List<Permission> selectAll();
+
+    List<Permission> selectByQueryObj(QueryObj queryObj);
 }

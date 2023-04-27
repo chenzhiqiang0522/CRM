@@ -36,4 +36,11 @@
             <include refid="selectColumns" />
             from t_auth_permission
     </select>
+    <select id="selectByQueryObj" resultMap="PermissionMap">
+        select
+        <include refid="selectColumns" />
+        from t_auth_permission
+        where name like concat('%',#{keyword},'%') or descs like concat('%',#{keyword},'%')
+        limit #{start},#{pageSize}
+    </select>
 </mapper>
