@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Controller
+@RestController
 @RequestMapping("/Departments")
 @Api(value = "部门的接口", description = "部门相关的CRUD功能")
 @Authority(name = "部门管理")
@@ -33,10 +33,11 @@ public class DepartmentController {
         return r;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
+//    @RequestMapping(method = RequestMethod.GET)
+//    @ResponseBody
+    @GetMapping
     @ApiOperation(value = "查询全部部门")
-    @Authority(name = "获取全部部门")
+    @Authority(name = "获取全部部门",descs = "获取全部部门")
     public ReturnResult getAll() {
         ReturnResult returnResult = new ReturnResult();
         List<Department> allDepartment = null;
@@ -50,8 +51,9 @@ public class DepartmentController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    @ResponseBody
+//    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+//    @ResponseBody
+    @GetMapping(value = "/{id}")
     @ApiOperation(value = "通过ID查询部门信息")
     @Authority(name = "通过ID查询部门信息")
     public ReturnResult getDepartmentByID(@PathVariable("id") Long id) {
@@ -70,8 +72,9 @@ public class DepartmentController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    @ResponseBody
+//    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+//    @ResponseBody
+    @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "通过ID删除部门信息")
     @Authority(name = "通过ID删除部门信息")
     public ReturnResult deleteDepartmentById(@PathVariable("id") Long id) {
@@ -92,8 +95,9 @@ public class DepartmentController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/add")
-    @ResponseBody
+//    @RequestMapping(method = RequestMethod.POST, value = "/add")
+//    @ResponseBody
+    @PostMapping(value = "/add")
     @ApiOperation(value = "通过增加和修改部门信息")
     @Authority(name = "增加和修改部门信息")
     public ReturnResult addAndModifyDepartment(@RequestBody Department department) {
@@ -116,8 +120,10 @@ public class DepartmentController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/pageList")
-    @ResponseBody
+//    @RequestMapping(method = RequestMethod.POST, value = "/pageList")
+    @PostMapping(value = "/pageList")
+//    @ResponseBody
+    @Authority(name = "高级查询",descs = "高级查询")
     public ReturnResult pageList(@RequestBody DepartmentQueryObject queryObject) {
         System.out.println(queryObject);
         PageList<Department> departmentPageList = new PageList<>();
@@ -138,6 +144,7 @@ public class DepartmentController {
 
     @RequestMapping(method = RequestMethod.PATCH, value = "/patchDelete")
     @ResponseBody
+    @Authority(name = "批量删除",descs = "批量删除部门")
     public ReturnResult patchDeleteDepartments(@RequestBody ArrayList<Long> ids){
         ReturnResult returnResult = new ReturnResult();
         System.out.println("批量删除参数"+ids);
@@ -152,6 +159,7 @@ public class DepartmentController {
     }
     @RequestMapping(method = RequestMethod.GET, value = "/departmentTree")
     @ResponseBody
+    @Authority(name = "部门树",descs = "获取全部的以及部门以及该部门的子部门")
     public ReturnResult getDepartmentTree(){
         ReturnResult returnResult = new ReturnResult();
         try {

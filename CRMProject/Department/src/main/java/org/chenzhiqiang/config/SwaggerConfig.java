@@ -1,4 +1,4 @@
-package org.chenzhiqiang.utils;
+package org.chenzhiqiang.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())//指定api相关的信息
                 .select()
                 //【重要】对外暴露服务的包,以controller的方式暴露,所以就是controller的包.
-                .apis(RequestHandlerSelectors.basePackage("org.chenzhiqiang.controller"))
+                .apis(RequestHandlerSelectors.basePackage("org.chenzhiqiang"))
                 .paths(PathSelectors.any())
                 .build();
     }

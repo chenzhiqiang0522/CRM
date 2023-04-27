@@ -48,7 +48,8 @@ public class AuthorityServiceImpl implements IAuthorityService {
                 Permission permission = new Permission();
                 permission.setName(method.getName());
                 permission.setDescs(annotation1.descs());
-                permission.setUrl(purl+getMethodUrl(method));
+                String methodUrl = getMethodUrl(method);
+                permission.setUrl(purl+methodUrl);
                 permission.setSn(aClass.getSimpleName()+":"+method.getName());
                 permission.setParentId(parentPermission.getId());
                 permissionMapper.insert(permission);
@@ -56,9 +57,15 @@ public class AuthorityServiceImpl implements IAuthorityService {
         }
     }
 
+    @Override
+    public List<Permission> getAllPermissions() {
+        List<Permission> permissions = permissionMapper.selectAll();
+        return permissions;
+    }
+
     private String getMethodUrl(Method method){
         String methodUrl = "";
-        /*RequestTypeEnum[] requestTypeEnums = RequestTypeEnum.values();
+        RequestTypeEnum[] requestTypeEnums = RequestTypeEnum.values();
         for (RequestTypeEnum requestTypeEnum : requestTypeEnums) {
             Annotation annotation = method.getAnnotation(requestTypeEnum.getRequestType());
             if (Objects.isNull(annotation))
@@ -74,27 +81,27 @@ public class AuthorityServiceImpl implements IAuthorityService {
                 throw new RuntimeException(e);
             }
         }
-        return methodUrl;*/
-        PutMapping putMapping = method.getAnnotation(PutMapping.class);
-        if(Objects.nonNull(putMapping)){
-            methodUrl = putMapping.value() != null && putMapping.value().length > 0 ? putMapping.value()[0] : "";
-        }
-        PostMapping postMapping = method.getAnnotation(PostMapping.class);
-        if(Objects.nonNull(postMapping)){
-            methodUrl = postMapping.value() != null && postMapping.value().length > 0 ? postMapping.value()[0] : "";
-        }
-        GetMapping getMapping = method.getAnnotation(GetMapping.class);
-        if(Objects.nonNull(getMapping)){
-            methodUrl = getMapping.value() != null && getMapping.value().length > 0? getMapping.value()[0] : "";
-        }
-        DeleteMapping deleteMapping = method.getAnnotation(DeleteMapping.class);
-        if(Objects.nonNull(deleteMapping)){
-            methodUrl = deleteMapping.value() != null && deleteMapping.value().length > 0 ? deleteMapping.value()[0] : "";
-        }
-        PatchMapping patchMapping = method.getAnnotation(PatchMapping.class);
-        if(Objects.nonNull(patchMapping)){
-            methodUrl = patchMapping.value() != null && patchMapping.value().length > 0 ? patchMapping.value()[0] : "";
-        }
         return methodUrl;
+//        PutMapping putMapping = method.getAnnotation(PutMapping.class);
+//        if(Objects.nonNull(putMapping)){
+//            methodUrl = putMapping.value() != null && putMapping.value().length > 0 ? putMapping.value()[0] : "";
+//        }
+//        PostMapping postMapping = method.getAnnotation(PostMapping.class);
+//        if(Objects.nonNull(postMapping)){
+//            methodUrl = postMapping.value() != null && postMapping.value().length > 0 ? postMapping.value()[0] : "";
+//        }
+//        GetMapping getMapping = method.getAnnotation(GetMapping.class);
+//        if(Objects.nonNull(getMapping)){
+//            methodUrl = getMapping.value() != null && getMapping.value().length > 0? getMapping.value()[0] : "";
+//        }
+//        DeleteMapping deleteMapping = method.getAnnotation(DeleteMapping.class);
+//        if(Objects.nonNull(deleteMapping)){
+//            methodUrl = deleteMapping.value() != null && deleteMapping.value().length > 0 ? deleteMapping.value()[0] : "";
+//        }
+//        PatchMapping patchMapping = method.getAnnotation(PatchMapping.class);
+//        if(Objects.nonNull(patchMapping)){
+//            methodUrl = patchMapping.value() != null && patchMapping.value().length > 0 ? patchMapping.value()[0] : "";
+//        }
+//        return methodUrl;
     }
 }

@@ -9,6 +9,7 @@ spring:
     username: root
     password: 123456
 mybatis:
-  type-aliases-package: org.chenzhiqiang.domain
+  type-aliases-package: org.chenzhiqiang.domain,org.chenzhiqiang.authority.domain
+#  配置扫描权限注解的包位置
 authority:
-  package: org.chenzhiqiang.controller
+  package: org.chenzhiqiang.controller,org.chenzhiqiang.authority.controller
