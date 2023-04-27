@@ -46,12 +46,12 @@ public class AuthorityController {
     }
 
     @PostMapping("/pageList")
-    @ApiOperation(value = "权限高分页高级查询")
-    @Authority(name = "权限高分页高级查询",descs = "权限高分页高级查询")
+    @ApiOperation(value = "权限分页高级查询")
+    @Authority(name = "权限分页高级查询",descs = "权限分页高级查询")
     public ReturnResult pageList(@RequestBody QueryObj queryObj){
         PageList<Permission> permissionPageList = new PageList<>();
-        List<Permission> permissions = authorityServiceImpl.getAllPermissions();
-        permissionPageList.setTotal(permissions.size());
+        List<Permission> totalByQueryObj = authorityServiceImpl.getTotalByQueryObj(queryObj);
+        permissionPageList.setTotal(totalByQueryObj.size());
         List<Permission> permissions1 = authorityServiceImpl.pageList(queryObj);
         permissionPageList.setRows(permissions1);
         returnResult.setResultObj(permissionPageList);

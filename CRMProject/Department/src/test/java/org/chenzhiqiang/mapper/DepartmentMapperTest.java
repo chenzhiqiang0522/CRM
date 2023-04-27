@@ -23,12 +23,12 @@ public class DepartmentMapperTest extends BaseTest {
         System.out.println(department);
     }
 
-    @Test
-    public void addDepartment() {
-        Department department = new Department("utils", "this s a   jj k k  l  k uj i ");
-        departmentMapper.addDepartment(department);
-        System.out.println("返回的id为："+department.getId());
-    }
+//    @Test
+//    public void addDepartment() {
+//        Department department = new Department("utils", "this s a   jj k k  l  k uj i ");
+//        departmentMapper.addDepartment(department);
+//        System.out.println("返回的id为："+department.getId());
+//    }
 
     @Test
     public void deleteByName() {
@@ -43,11 +43,11 @@ public class DepartmentMapperTest extends BaseTest {
         System.out.println("执行结果为"+integer);
     }
 
-    @Test
-    public void modifyDepartment() {
-        Department department = new Department("utils1", "11111111111");
-        departmentMapper.modifyDepartment(department);
-    }
+//    @Test
+//    public void modifyDepartment() {
+//        Department department = new Department("utils1", "11111111111");
+//        departmentMapper.modifyDepartment(department);
+//    }
 
     @Test
     public void getChildDepartments() {

@@ -1,5 +1,6 @@
 package org.chenzhiqiang.authority.service.impl;
 
+import io.swagger.models.auth.In;
 import org.chenzhiqiang.RequestTypeEnum;
 import org.chenzhiqiang.authority.annotation.Authority;
 import org.chenzhiqiang.authority.domain.Permission;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -62,6 +64,24 @@ public class AuthorityServiceImpl implements IAuthorityService {
     public List<Permission> getAllPermissions() {
         List<Permission> permissions = permissionMapper.selectAll();
         return permissions;
+    }
+
+    @Override
+    public Integer deletePermissionById(Long id) {
+        Integer changeRows = permissionMapper.deleteById(id);
+        return changeRows;
+    }
+
+    @Override
+    public Integer patchDeletePermissionById(ArrayList<Long> ids) {
+        Integer changeRows = permissionMapper.patchDelete(ids);
+        return changeRows;
+    }
+
+    @Override
+    public List<Permission> getTotalByQueryObj(QueryObj queryObj) {
+        List<Permission> total = permissionMapper.getTotal(queryObj);
+        return total;
     }
 
     @Override

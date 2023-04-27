@@ -1,12 +1,13 @@
 package org.chenzhiqiang.utils;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class QueryObj {
     private String keyword;
     private Integer currentPage;

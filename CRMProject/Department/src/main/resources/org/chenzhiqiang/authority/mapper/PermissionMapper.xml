@@ -5,42 +5,64 @@
         `id`,`name`,`url`,`descs`,`sn`,`parent_id`
     </sql>
     <resultMap id="PermissionMap" type="Permission">
-        <id column="id" property="id" />
-        <result property="name" column="name" />
-        <result property="url" column="url" />
-        <result property="descs" column="descs" />
-        <result property="sn" column="sn" />
-        <result property="parentId" column="parent_id" />
+        <id column="id" property="id"/>
+        <result property="name" column="name"/>
+        <result property="url" column="url"/>
+        <result property="descs" column="descs"/>
+        <result property="sn" column="sn"/>
+        <result property="parentId" column="parent_id"/>
     </resultMap>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into t_auth_permission
-        (
-            name,
-            url,
-            descs,
-            sn,
-            parent_id
-        )values (
-                    #{name},
-                    #{url},
-                    #{descs},
-                    #{sn},
-                    #{parentId}
-                )
+        (name,
+         url,
+         descs,
+         sn,
+         parent_id)
+        values (#{name},
+                #{url},
+                #{descs},
+                #{sn},
+                #{parentId})
     </insert>
     <delete id="deleteAll">
-        delete from t_auth_permission
+        delete
+        from t_auth_permission
+    </delete>
+    <delete id="deleteById">
+        delete
+        from t_auth_permission
+        where id = #{id}
+    </delete>
+    <delete id="patchDelete">
+        delete from t_auth_permission where id in
+        <foreach collection="list" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
     </delete>
     <select id="selectAll" resultMap="PermissionMap">
         select
-            <include refid="selectColumns" />
-            from t_auth_permission
+        <include refid="selectColumns"/>
+        from t_auth_permission
     </select>
+    <sql id="whereCondition">
+        <where>
+            <if test="keyword != null and keyword != ''">
+                name like concat('%',#{keyword},'%') or descs like concat('%',#{keyword},'%')
+            </if>
+        </where>
+    </sql>
     <select id="selectByQueryObj" resultMap="PermissionMap">
         select
-        <include refid="selectColumns" />
+        <include refid="selectColumns"/>
         from t_auth_permission
-        where name like concat('%',#{keyword},'%') or descs like concat('%',#{keyword},'%')
+        <include refid="whereCondition"/>
         limit #{start},#{pageSize}
+    </select>
+    <select id="getTotal" resultMap="PermissionMap">
+        select
+        <include refid="selectColumns"/>
+        from t_auth_permission
+        <include refid="whereCondition" />
     </select>
 </mapper>
