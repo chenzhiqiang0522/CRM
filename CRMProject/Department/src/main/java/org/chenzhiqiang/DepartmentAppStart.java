@@ -8,7 +8,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
 @MapperScan({"org.chenzhiqiang.mapper", "org.chenzhiqiang.authority.mapper"})
-@ServletComponentScan("org.chenzhiqiang.authority.linstener")
+@ServletComponentScan("org.chenzhiqiang.authority.listener")
+//@ServletComponentScan(basePackages = "org.chenzhiqiang.authority.linstener")
 public class DepartmentAppStart {
     public static void main(String[] args) {
         SpringApplication.run(DepartmentAppStart.class,args);

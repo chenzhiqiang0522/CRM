@@ -13,6 +13,6 @@ public class Permission {
     private String url;
     private String descs;
     private String sn;
-    private Long parent_id;
+    private Long parentId;
 
 }

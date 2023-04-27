@@ -1,4 +1,4 @@
-package org.chenzhiqiang.authority.linstener;
+package org.chenzhiqiang.authority.listener;
 
 import org.chenzhiqiang.authority.service.IAuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,12 @@ public class InintListener implements ServletContextListener {
     private IAuthorityService iAuthorityService;
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("扫描所有权限注解。。。。。。。。。。。。。。。。。。。。。");
+//        System.out.println("扫描所有权限注解。。。。。。。。。。。。。。。。。。。。。");
+//        ServletContext servletContext = sce.getServletContext();
+//        WebApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+//        assert applicationContext != null;
+//        AuthorityServiceImpl authorityServiceImpl = applicationContext.getBean(AuthorityServiceImpl.class);
+//        authorityServiceImpl.scan();
         iAuthorityService.scan();
     }
 

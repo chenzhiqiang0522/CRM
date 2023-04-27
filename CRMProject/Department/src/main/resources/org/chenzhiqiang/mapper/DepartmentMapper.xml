@@ -34,7 +34,7 @@
             `parent_id`=#{parent.id},
             `path`=#{path},
             `state`=#{state}
-        WHERE id = 53
+        WHERE id = #{id}
     </update>
     <delete id="deleteByName">
         DELETE
