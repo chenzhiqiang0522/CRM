@@ -11,6 +11,7 @@ import org.chenzhiqiang.utils.ReturnResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -53,12 +54,23 @@ public class RoleController {
         return returnResult;
     }
 
-/*    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")
     @ApiOperation(value = "根据id删除角色")
     @Authority(name = "根据id删除角色", descs = "根据id删除角色")
     public ReturnResult deleteRoleById(@PathVariable("id") Long id){
+        Integer deleteRowsNum = roleServiceImpl.deleteRoleById(id);
+        returnResult.setMsg("删除了"+deleteRowsNum+"行数据。");
+        return returnResult;
+    }
 
-    }*/
+    @PatchMapping("/patchDeleteRoles")
+    @ApiOperation(value = "批量删除角色")
+    @Authority(name = "批量删除角色", descs = "批量删除角色")
+    public ReturnResult patchDeleteRoles(@RequestBody ArrayList<Long> ids){
+        Integer deleteRowsNum = roleServiceImpl.patchDelete(ids);
+        returnResult.setMsg("删除了"+deleteRowsNum+"行数据。");
+        return returnResult;
+    }
 
     @PostMapping(value = "/upadateRole")
     @Authority(name = "修改角色", descs = "修改角色")
