@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.chenzhiqiang.authority.mapper.RoleMapper">
+    <sql id="selectColums">
+        `id`,`name`,`sn`
+    </sql>
+    <insert id="addRole" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO t_auth_role VALUES (#{id},#{name},#{sn})
+    </insert>
+    <update id="updateRole">
+        UPDATE t_auth_role
+        SET `name`=#{name},
+            `sn`=#{sn}
+        where `id`=#{id}
+    </update>
+    <delete id="deleteRoleById">
+        delete
+        from t_auth_role
+        where id = #{id}
+    </delete>
+    <delete id="patchDelete">
+        delete from t_auth_role where id in
+        <foreach collection="list" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectAlls" resultType="Role">
+        select
+        <include refid="selectColums"></include>
+        from t_auth_role
+    </select>
+    <select id="selectAllsByQueryObj" resultType="Role">
+        select
+        <include refid="selectColums"></include>
+        from t_auth_role
+        <include refid="whereCondition"></include>
+    </select>
+    <select id="pageList" resultType="Role">
+        select
+        <include refid="selectColums"></include>
+        from t_auth_role
+        <include refid="whereCondition"></include>
+        limit #{start},#{pageSize}
+    </select>
+    <sql id="whereCondition">
+        <where>
+            <if test="keyword != null and keyword != ''">
+                name like concat('%',#{keyword},'%') or sn like concat('%',#{keyword},'%')
+            </if>
+        </where>
+    </sql>
+
+
+</mapper>
