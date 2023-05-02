@@ -18,4 +18,5 @@ public interface PermissionMapper {
     List<Permission> getTotal(QueryObj queryObj);
 
     List<Permission> selectByQueryObj(QueryObj queryObj);
+    List<Permission> tree();
 }

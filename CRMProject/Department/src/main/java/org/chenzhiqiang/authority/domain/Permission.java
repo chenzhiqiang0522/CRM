@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,5 +16,6 @@ public class Permission {
     private String descs;
     private String sn;
     private Long parentId;
+    private List<Permission> children;
 
 }

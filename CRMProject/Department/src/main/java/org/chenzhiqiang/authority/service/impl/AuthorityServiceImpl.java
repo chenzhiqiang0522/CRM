@@ -78,6 +78,12 @@ public class AuthorityServiceImpl implements IAuthorityService {
         return permissions;
     }
 
+    @Override
+    public List<Permission> tree() {
+        List<Permission> childPermissions = permissionMapper.tree();
+        return childPermissions;
+    }
+
     private String getMethodUrl(Method method){
         String methodUrl = "";
         RequestTypeEnum[] requestTypeEnums = RequestTypeEnum.values();

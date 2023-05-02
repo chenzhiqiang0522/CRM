@@ -57,4 +57,21 @@ public class AuthorityController {
         returnResult.setResultObj(permissionPageList);
         return returnResult;
     }
+
+    @GetMapping("/permissionTree")
+    @ApiOperation(value = "获取子权限")
+    @Authority(name = "获取子权限",descs = "获取子权限")
+    public ReturnResult tree(){
+        try {
+            List<Permission> childrenTree = authorityServiceImpl.tree();
+            returnResult.setResultObj(childrenTree);
+            return returnResult;
+        } catch (Exception e) {
+            returnResult.setSuccess(false);
+            returnResult.setMsg(e.getMessage());
+            return returnResult;
+        }
+
+
+    }
 }

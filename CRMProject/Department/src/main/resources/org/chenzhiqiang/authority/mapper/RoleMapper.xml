@@ -5,13 +5,20 @@
         `id`,`name`,`sn`
     </sql>
     <insert id="addRole" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        INSERT INTO t_auth_role VALUES (#{id},#{name},#{sn})
+        INSERT INTO t_auth_role
+        VALUES (#{id}, #{name}, #{sn})
+    </insert>
+    <insert id="savePermission">
+        insert into t_auth_role_permission(role_id,permission_sn) values
+        <foreach collection="permissionSns" item="item" separator=",">
+            (#{roleId},#{item})
+        </foreach>
     </insert>
     <update id="updateRole">
         UPDATE t_auth_role
         SET `name`=#{name},
             `sn`=#{sn}
-        where `id`=#{id}
+        where `id` = #{id}
     </update>
     <delete id="deleteRoleById">
         delete
@@ -23,6 +30,11 @@
         <foreach collection="list" open="(" separator="," close=")" item="id">
             #{id}
         </foreach>
+    </delete>
+    <delete id="deleteRoleByRoleId">
+        delete
+        from t_auth_role_permission
+        where role_id = #{roleId}
     </delete>
     <select id="selectAlls" resultType="Role">
         select

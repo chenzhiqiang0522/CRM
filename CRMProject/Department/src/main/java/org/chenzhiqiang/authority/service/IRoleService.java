@@ -1,6 +1,7 @@
 package org.chenzhiqiang.authority.service;
 
 import org.chenzhiqiang.authority.domain.Role;
+import org.chenzhiqiang.authority.domain.dto.RolePermissionDTO;
 import org.chenzhiqiang.utils.QueryObj;
 
 import java.util.ArrayList;
@@ -14,4 +15,6 @@ public interface IRoleService {
     Integer patchDelete(ArrayList<Long> ids);
     Integer addRole(Role role);
     Integer updateRole(Role role);
+
+    void setPermission(RolePermissionDTO rolePermissionDTO);
 }

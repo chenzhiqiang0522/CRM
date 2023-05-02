@@ -1,6 +1,8 @@
 package org.chenzhiqiang.authority.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.chenzhiqiang.authority.domain.Role;
+import org.chenzhiqiang.authority.domain.dto.RolePermissionDTO;
 import org.chenzhiqiang.utils.QueryObj;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +19,7 @@ public interface RoleMapper {
     Integer updateRole(Role role);
 
 
+    void deleteRoleByRoleId(Long roleId);
+
+    void savePermission(@Param("roleId") Long roleId, @Param("permissionSns") List<String> permissionSns);
 }

@@ -11,6 +11,11 @@
         <result property="descs" column="descs"/>
         <result property="sn" column="sn"/>
         <result property="parentId" column="parent_id"/>
+        <collection property="children" ofType="Permission">
+            <id column="cid" property="id" />
+            <result property="name" column="cname" />
+            <result property="sn" column="csn" />
+        </collection>
     </resultMap>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into t_auth_permission
@@ -64,5 +69,17 @@
         <include refid="selectColumns"/>
         from t_auth_permission
         <include refid="whereCondition" />
+    </select>
+    <select id="tree" resultMap="PermissionMap">
+        SELECT
+            p.*,
+            c.id cid,
+            c.`name` cname,
+            c.sn as csn
+        FROM
+            t_auth_permission p
+                LEFT JOIN t_auth_permission c ON p.id = c.parent_id
+        WHERE
+            p.parent_id IS NULL
     </select>
 </mapper>

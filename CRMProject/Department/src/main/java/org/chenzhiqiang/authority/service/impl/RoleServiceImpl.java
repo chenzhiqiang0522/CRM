@@ -1,6 +1,8 @@
 package org.chenzhiqiang.authority.service.impl;
 
+import org.apache.ibatis.annotations.Param;
 import org.chenzhiqiang.authority.domain.Role;
+import org.chenzhiqiang.authority.domain.dto.RolePermissionDTO;
 import org.chenzhiqiang.authority.mapper.RoleMapper;
 import org.chenzhiqiang.authority.service.IRoleService;
 import org.chenzhiqiang.utils.QueryObj;
@@ -48,15 +50,24 @@ public class RoleServiceImpl implements IRoleService {
         return changRowNum;
     }
 
+    @Transactional
     @Override
     public Integer addRole(Role role) {
         Integer addRowsNum = roleMapper.addRole(role);
         return addRowsNum;
     }
 
+    @Transactional
     @Override
     public Integer updateRole(Role role) {
         Integer changeRowsNum = roleMapper.updateRole(role);
         return changeRowsNum;
+    }
+
+    @Transactional
+    @Override
+    public void setPermission(RolePermissionDTO rolePermissionDTO) {
+        roleMapper.deleteRoleByRoleId(rolePermissionDTO.getRoleId());
+        roleMapper.savePermission(rolePermissionDTO.getRoleId(),rolePermissionDTO.getPermissionSns());
     }
 }

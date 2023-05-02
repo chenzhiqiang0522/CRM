@@ -13,4 +13,5 @@ public interface IAuthorityService {
     List<Permission> getAllPermissions();
     List<Permission> getTotalByQueryObj(QueryObj queryObj);
     List<Permission> pageList(QueryObj queryObj);
+    List<Permission> tree();
 }

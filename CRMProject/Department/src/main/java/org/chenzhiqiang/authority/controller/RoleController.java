@@ -3,7 +3,9 @@ package org.chenzhiqiang.authority.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.chenzhiqiang.authority.annotation.Authority;
+import org.chenzhiqiang.authority.domain.Permission;
 import org.chenzhiqiang.authority.domain.Role;
+import org.chenzhiqiang.authority.domain.dto.RolePermissionDTO;
 import org.chenzhiqiang.authority.service.IRoleService;
 import org.chenzhiqiang.utils.PageList;
 import org.chenzhiqiang.utils.QueryObj;
@@ -23,6 +25,15 @@ public class RoleController {
     private IRoleService roleServiceImpl;
     @Autowired
     private ReturnResult returnResult;
+
+    public ReturnResult errorMethod(Exception e, ReturnResult r) {
+        e.printStackTrace();
+        r.setSuccess(Boolean.valueOf("false"));
+        r.setMsg("执行失败");
+        r.setResultObj(e.getMessage());
+        System.out.println(r);
+        return r;
+    }
     @GetMapping
     @ApiOperation(value = "获取全部角色")
     @Authority(name = "获取全部角色",descs = "获取全部角色")
@@ -88,5 +99,18 @@ public class RoleController {
         Integer insertRowsNum = roleServiceImpl.addRole(role);
         returnResult.setMsg("修改了"+insertRowsNum+"行数据");
         return returnResult;
+    }
+
+    @PostMapping(value = "/setPermission")
+    @Authority(name = "设置权限",descs = "设置权限")
+    @ApiOperation(value = "设置权限")
+    public ReturnResult setPermission(@RequestBody RolePermissionDTO rolePermissionDTO){
+        try {
+            roleServiceImpl.setPermission(rolePermissionDTO);
+//            returnResult.setResultObj(allPermissions);
+            return returnResult;
+        } catch (Exception e) {
+            return errorMethod(e,returnResult);
+        }
     }
 }
