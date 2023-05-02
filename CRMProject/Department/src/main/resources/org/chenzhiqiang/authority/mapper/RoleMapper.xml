@@ -54,6 +54,9 @@
         <include refid="whereCondition"></include>
         limit #{start},#{pageSize}
     </select>
+    <select id="getPermissionByRoleId" resultType="java.lang.String">
+        select permission_sn from t_auth_role_permission where role_id = #{roleId}
+    </select>
     <sql id="whereCondition">
         <where>
             <if test="keyword != null and keyword != ''">

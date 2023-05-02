@@ -17,4 +17,6 @@ public interface IRoleService {
     Integer updateRole(Role role);
 
     void setPermission(RolePermissionDTO rolePermissionDTO);
+
+    List<String> getPermissionByRoleId(Long roleId);
 }

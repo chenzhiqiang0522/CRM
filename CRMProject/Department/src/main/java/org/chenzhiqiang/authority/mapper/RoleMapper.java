@@ -22,4 +22,6 @@ public interface RoleMapper {
     void deleteRoleByRoleId(Long roleId);
 
     void savePermission(@Param("roleId") Long roleId, @Param("permissionSns") List<String> permissionSns);
+
+    List<String> getPermissionByRoleId(Long roleId);
 }

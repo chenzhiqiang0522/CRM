@@ -70,4 +70,10 @@ public class RoleServiceImpl implements IRoleService {
         roleMapper.deleteRoleByRoleId(rolePermissionDTO.getRoleId());
         roleMapper.savePermission(rolePermissionDTO.getRoleId(),rolePermissionDTO.getPermissionSns());
     }
+
+    @Override
+    public List<String> getPermissionByRoleId(Long roleId) {
+        List<String> permissionSns = roleMapper.getPermissionByRoleId(roleId);
+        return permissionSns;
+    }
 }

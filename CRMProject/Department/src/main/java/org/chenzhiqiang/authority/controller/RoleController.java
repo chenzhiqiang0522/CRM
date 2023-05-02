@@ -113,4 +113,17 @@ public class RoleController {
             return errorMethod(e,returnResult);
         }
     }
+
+    @GetMapping(value = "/getPermissionSns/{roleId}")
+    @Authority(name = "获取角色已经拥有权限的sn",descs = "获取角色已经拥有权限的sn")
+    @ApiOperation(value = "获取角色已经拥有权限的sn")
+    public ReturnResult getPermissionByRoleId(@PathVariable("roleId")Long roleId){
+        try {
+            List<String> permissionByRoleId = roleServiceImpl.getPermissionByRoleId(roleId);
+            returnResult.setResultObj(permissionByRoleId);
+            return returnResult;
+        } catch (Exception e) {
+            return errorMethod(e,returnResult);
+        }
+    }
 }
