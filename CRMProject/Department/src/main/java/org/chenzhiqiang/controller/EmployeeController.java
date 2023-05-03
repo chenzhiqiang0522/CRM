@@ -95,7 +95,7 @@ public class EmployeeController {
 
     }
 
-    @PatchMapping(value = "/batchDelete")
+    @PatchMapping(value = "/patchDelete")
     @ApiOperation(value = "批量删除员工")
     @Authority(name = "批量删除员工",descs = "批量删除员工")
     public ReturnResult batchDelete(@RequestBody ArrayList<Long> ids){
