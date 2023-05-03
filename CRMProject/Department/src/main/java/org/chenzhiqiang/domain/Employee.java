@@ -16,4 +16,13 @@ public class Employee {
     private String headImage;
     private Integer age;
     private Long departmentId;
+
+    public Employee(String username, String password, String email, String headImage, Integer age, Long departmentId) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.headImage = headImage;
+        this.age = age;
+        this.departmentId = departmentId;
+    }
 }

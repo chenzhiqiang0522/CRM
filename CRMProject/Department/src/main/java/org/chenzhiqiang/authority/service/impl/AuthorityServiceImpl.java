@@ -80,8 +80,7 @@ public class AuthorityServiceImpl implements IAuthorityService {
 
     @Override
     public List<Permission> tree() {
-        List<Permission> childPermissions = permissionMapper.tree();
-        return childPermissions;
+        return null;
     }
 
     private String getMethodUrl(Method method){

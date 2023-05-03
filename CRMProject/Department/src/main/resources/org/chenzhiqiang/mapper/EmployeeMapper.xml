@@ -4,18 +4,60 @@
     <sql id="employeeColumns">
         `username`,`password`,`id`,`headImage`,`email`,`department_id`,`age`
     </sql>
+    <insert id="addEmployee" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into t_org_employee (username, password, email, headImage, age, department_id)
+        values (#{username}, #{password}, #{email}, #{headImage}, #{age}, #{departmentId});
+    </insert>
+    <update id="modifyEmployee">
+        update t_org_employee
+        set username      = #{username},
+            password      = #{password},
+            id            = #{id},
+            headImage     = #{headImage},
+            email         = #{email},
+            department_id = #{departmentId},
+            age           = #{age}
+        where id = #{id};
+    </update>
+    <delete id="deleteById">
+        delete
+        from t_org_employee
+        where id = #{id}
+    </delete>
+    <delete id="batchDelete">
+        delete
+        from t_org_employee
+        where id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
     <resultMap id="employeeResultMap" type="Employee">
-        <id property="id" column="id" />
-        <result property="username" column="username" />
-        <result property="password" column="password" />
-        <result property="email" column="email" />
-        <result property="headImage" column="headImage" />
-        <result property="age" column="age" />
-        <result property="departmentId" column="department_id" />
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="headImage" column="headImage"/>
+        <result property="age" column="age"/>
+        <result property="departmentId" column="department_id"/>
     </resultMap>
     <select id="selectAll" resultMap="employeeResultMap">
         SELECT
         <include refid="employeeColumns"/>
         FROM t_org_employee
+    </select>
+    <sql id="whereCondition">
+        <where>
+            <if test="keyword != null and keyword !=''">
+                username like concat('%',#{keyword},'%') or email like concat('%',#{keyword},'%')
+            </if>
+        </where>
+    </sql>
+    <select id="selectByQueryObj" resultMap="employeeResultMap">
+        select
+        <include refid="employeeColumns"/>
+        from t_org_employee
+        <include refid="whereCondition"/>
+        limit #{start},#{pageSize}
     </select>
 </mapper>
