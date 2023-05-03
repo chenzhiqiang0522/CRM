@@ -7,7 +7,8 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-@MapperScan({"org.chenzhiqiang.mapper", "org.chenzhiqiang.authority.mapper"})
+@MapperScan({"org.chenzhiqiang.mapper", "org.chenzhiqiang.authority.mapper",
+        "org.chenzhiqiang.OperateMenu.mapper"})
 @ServletComponentScan("org.chenzhiqiang.authority.listener")
 //@ServletComponentScan(basePackages = "org.chenzhiqiang.authority.linstener")
 public class DepartmentAppStart {
