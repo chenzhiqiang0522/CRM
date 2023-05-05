@@ -1,5 +1,6 @@
 package org.chenzhiqiang;
 
+import org.chenzhiqiang.authority.interceptor.AuthorityInterceptor;
 import org.chenzhiqiang.login.interceptor.LoginInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class DepartmentAppStart implements WebMvcConfigurer {
     @Autowired
     private LoginInterceptor loginInterceptor;
+
+    @Autowired
+    private AuthorityInterceptor authorityInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/login","/logout");
+        registry.addInterceptor(authorityInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/login","/logout");
     }

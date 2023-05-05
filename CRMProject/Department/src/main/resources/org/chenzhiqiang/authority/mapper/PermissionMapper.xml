@@ -12,9 +12,9 @@
         <result property="sn" column="sn"/>
         <result property="parentId" column="parent_id"/>
         <collection property="children" ofType="Permission">
-            <id column="cid" property="id" />
-            <result property="name" column="cname" />
-            <result property="sn" column="csn" />
+            <id column="cid" property="id"/>
+            <result property="name" column="cname"/>
+            <result property="sn" column="csn"/>
         </collection>
     </resultMap>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
@@ -68,18 +68,21 @@
         select
         <include refid="selectColumns"/>
         from t_auth_permission
-        <include refid="whereCondition" />
+        <include refid="whereCondition"/>
     </select>
     <select id="tree" resultMap="PermissionMap">
-        SELECT
-            p.*,
-            c.id cid,
-            c.`name` cname,
-            c.sn as csn
-        FROM
-            t_auth_permission p
-                LEFT JOIN t_auth_permission c ON p.id = c.parent_id
-        WHERE
-            p.parent_id IS NULL
+        SELECT p.*,
+               c.id     cid,
+               c.`name` cname,
+               c.sn as  csn
+        FROM t_auth_permission p
+                 LEFT JOIN t_auth_permission c ON p.id = c.parent_id
+        WHERE p.parent_id IS NULL
+    </select>
+    <select id="getAllPermissionsById" resultType="java.lang.String">
+        SELECT rp.permission_sn
+        FROM t_auth_employee_role er
+                 LEFT JOIN t_auth_role_permission rp ON er.role_id = rp.role_id
+        WHERE er.employee_id = #{id}
     </select>
 </mapper>
