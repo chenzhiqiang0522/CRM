@@ -18,4 +18,6 @@ public interface IOperateMenu {
     List<OperateMenu> seletOperateMenuByQueryObjec(QueryObj queryObj);
 
     Integer patchDeleteOperateMenus(ArrayList<Long> ids);
+
+    List<OperateMenu> tree(Long loginUserId);
 }

@@ -55,7 +55,7 @@ public class AuthorityInterceptor implements HandlerInterceptor {
         String urlPermission = classSimpleName.concat(":").concat(methodName);
 //            判断当前URL所需要的权限是否存在于用户权限中
         if (!allPermissions.contains(urlPermission)){
-            response.getWriter().print("{\"success\":false,\"msg\":\"缺少操作该功能的权限\"}");
+            response.getWriter().print("{\"success\":false,\"msg\":\"forbidden\"}");
             return false;
         }
         return true;

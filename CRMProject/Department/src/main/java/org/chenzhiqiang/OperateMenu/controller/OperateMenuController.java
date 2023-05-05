@@ -127,4 +127,19 @@ public class OperateMenuController {
         }
 
     }
+
+    @GetMapping(value = "/tree/{loginUserId}")
+    @Authority(name = "tree",descs = "获取一级菜单以及其二级菜单")
+    @ApiOperation(value = "获取一级菜单以及其二级菜单")
+    public ReturnResult tree(@PathVariable Long loginUserId){
+        try {
+            List<OperateMenu> tree = operateMenuImpl.tree(loginUserId);
+            returnResult.setResultObj(tree);
+            return returnResult;
+        } catch (Exception e) {
+            errorMethod(e,returnResult);
+            return returnResult;
+        }
+    }
+
 }

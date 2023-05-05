@@ -60,4 +60,10 @@ public class OperateMenuImpl implements IOperateMenu {
         Integer delRowsNum = operateMenuMapper.patchDeleteDepartments(ids);
         return delRowsNum;
     }
+
+    @Override
+    public List<OperateMenu> tree(Long loginUserId) {
+        List<OperateMenu> tree = operateMenuMapper.tree(loginUserId);
+        return tree;
+    }
 }

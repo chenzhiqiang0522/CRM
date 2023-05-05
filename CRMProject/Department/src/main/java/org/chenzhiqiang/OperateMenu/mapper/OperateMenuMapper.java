@@ -24,4 +24,5 @@ public interface OperateMenuMapper {
     List<OperateMenu> pageList(QueryObj queryObj);
 
     Integer patchDeleteDepartments(ArrayList<Long> ids);
+    List<OperateMenu> tree(Long loginUserId);
 }
