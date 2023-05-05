@@ -6,7 +6,7 @@
         <result column="name" property="name"/>
         <result column="url" property="url"/>
         <result column="icon" property="icon"/>
-        <result column="parent_id" property="parenId"/>
+        <result column="parent_id" property="parentId"/>
     </resultMap>
 
     <sql id="selectColumns">

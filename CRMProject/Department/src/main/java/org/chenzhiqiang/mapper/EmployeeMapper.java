@@ -10,9 +10,11 @@ import java.util.List;
 @Repository
 public interface EmployeeMapper {
     List<Employee> selectAll();
+    Employee selectAllByUsername(String username);
     Integer deleteById(Long id);
     Integer batchDelete(ArrayList<Long> ids);
     Integer modifyEmployee(Employee employee);
     Long addEmployee(Employee employee);
     List<Employee> selectByQueryObj(QueryObj queryObj);
+
 }

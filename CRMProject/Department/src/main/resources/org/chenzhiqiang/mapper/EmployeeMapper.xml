@@ -60,4 +60,10 @@
         <include refid="whereCondition"/>
         limit #{start},#{pageSize}
     </select>
+    <select id="selectAllByUsername" resultType="Employee">
+        SELECT
+        <include refid="employeeColumns"/>
+        FROM t_org_employee
+        WHERE username = #{username}
+    </select>
 </mapper>
