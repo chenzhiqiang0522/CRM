@@ -28,10 +28,10 @@ public class DepartmentAppStart{
 //    public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(loginInterceptor)
 //                .addPathPatterns("/**")
-//                .excludePathPatterns("/login","/logout");
+//                .excludePathPatterns("/login","/logout",","/OperateMenu/tree/");
 //        registry.addInterceptor(authorityInterceptor)
 //                .addPathPatterns("/**")
-//                .excludePathPatterns("/login","/logout");
+//                .excludePathPatterns("/login","/logout","/OperateMenu/tree/");
 //    }
 
     public static void main(String[] args) {
