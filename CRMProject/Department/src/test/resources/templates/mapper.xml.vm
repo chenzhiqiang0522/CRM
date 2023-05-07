@@ -26,12 +26,12 @@
         )
     </insert>
     <!--删除对象-->
-    <delete id="remove" parameterType="long">
+    <delete id="deleteById" parameterType="long">
         delete from ${table.name} where id = #{id}
     </delete>
 
     <!--更新对象-->
-    <update id="update" parameterType="${entity}">
+    <update id="modify" parameterType="${entity}">
         update ${table.name}
         set
 
@@ -47,20 +47,20 @@
         where id = #{id}
     </update>
     <!--加载对象-->
-    <select id="loadById" resultType="${entity}" parameterType="long">
+    <select id="getById" resultType="${entity}" parameterType="long">
         select * from ${table.name} where id = #{id}
     </select>
     <!--加载所有对象-->
-    <select id="loadAll" resultType="${entity}">
+    <select id="getAll" resultType="${entity}">
         select * from ${table.name}
     </select>
     <!--//查询总数=参数（查询对象），返回值：long-->
-    <select id="loadCount" parameterType="${entity}Query" resultType="long">
+    <select id="getCount" parameterType="${entity}Query" resultType="long">
         select count(*) from ${table.name}
         <include refid="whereSql"/>
     </select>
     <!--//查询当前页数据=参数（查询对象），返回值:List-->
-    <select id="loadData" parameterType="${entity}Query" resultType="${entity}">
+    <select id="pageList" parameterType="${entity}Query" resultType="${entity}">
         select * from ${table.name}
         <include refid="whereSql"/>
         limit #{start},#{pageSize}
@@ -76,7 +76,7 @@
     </sql>
 
     <!--//批量删除-->
-    <delete id="bulkRemove" parameterType="arraylist">
+    <delete id="bachRemove" parameterType="arraylist">
         delete from ${table.name} where id in
         <foreach collection="list" item="id" open="(" close=")" separator=",">
             #{id}
