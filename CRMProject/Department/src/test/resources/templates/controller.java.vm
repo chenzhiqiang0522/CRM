@@ -1,0 +1,98 @@
+package ${package.Controller};
+
+import ${package.Service}.${table.serviceName};
+import ${package.Entity}.${entity};
+import ${cfg.parent}.query.${entity}Query;
+import org.chenzhiqiang.utils.QueryObj;
+import org.chenzhiqiang.utils.ReturnResult;
+import org.chenzhiqiang.utils.PageList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/${table.entityPath}")
+public class ${entity}Controller {
+    @Autowired
+    public ${table.serviceName} ${table.entityPath}Service;
+    public static ReturnResult errorMethod(Exception e, ReturnResult r) {
+        e.printStackTrace();
+        r.setSuccess(Boolean.valueOf("false"));
+        r.setMsg("执行失败");
+        r.setResultObj(e.getMessage());
+        System.out.println(r);
+        return r;
+    }
+    @PutMapping("/add")
+    public ReturnResult addOrModify(@RequestBody ${entity} ${table.entityPath}){
+        ReturnResult returnResult = new ReturnResult();
+        try {
+            if( ${table.entityPath}.getId()!=null)
+                ${table.entityPath}Service.modify(${table.entityPath});
+            else
+                ${table.entityPath}Service.add(${table.entityPath});
+            return returnResult;
+        } catch (Exception e) {
+            return errorMethod(e, returnResult);
+        }
+    }
+    /**
+    * 删除对象信息
+    * @param id
+    * @return
+    */
+    @DeleteMapping(value="/{id}")
+    public ReturnResult deleteById(@PathVariable("id") Long id){
+        ReturnResult returnResult = new ReturnResult();
+        try {
+            ${table.entityPath}Service.del(id);
+            return returnResult;
+        } catch (Exception e) {
+            return errorMethod(e, returnResult);
+        }
+    }
+	
+    //获取用户
+    @GetMapping("/{id}")
+    public ReturnResult getById(@PathVariable("id")Long id) {
+        ReturnResult returnResult = new ReturnResult();
+        try {
+            ${entity} ${table.entityPath} = ${table.entityPath}Service.getById(id);
+            returnResult.setResultObj(${table.entityPath});
+            return returnResult;
+        } catch (Exception e) {
+            return errorMethod(e, returnResult);
+        }
+    }
+
+
+    /**
+    * 查看所有的员工信息
+    * @return
+    */
+    @GetMapping
+    public ReturnResult list(){
+        ReturnResult returnResult = new ReturnResult();
+        try {
+            List< ${entity}> list = ${table.entityPath}Service.getAll();
+            returnResult.setResultObj(list);
+            return returnResult;
+        } catch (Exception e) {
+            return errorMethod(e, returnResult);
+        }
+    }
+
+
+    @PostMapping(value = "/pageList")
+    public ReturnResult pageList(@RequestBody QueryObj queryObj) {
+        ReturnResult returnResult = new ReturnResult();
+        try {
+            PageList<${entity}> pageList = ${table.entityPath}Service.queryPage(queryObj);
+            returnResult.setResultObj(pageList);
+            return returnResult;
+        } catch (Exception e) {
+            return errorMethod(e, returnResult);
+        }
+    }
+}

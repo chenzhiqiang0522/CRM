@@ -16,8 +16,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>Department</module>
-        <module>Employee</module>
     </modules>
+
 
 
 
