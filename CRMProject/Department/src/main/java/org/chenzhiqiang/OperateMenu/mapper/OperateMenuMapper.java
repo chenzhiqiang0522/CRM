@@ -31,4 +31,5 @@ public interface OperateMenuMapper {
     Integer deleteRoleMenu(Long id);
     Integer addRoleMenu(@Param("employeeId") Long employeeId, @Param("menuIds")List<Long> menuIds);
     List<Long> getRoleMenu(Long id);
+    List<OperateMenu> treeAllMenus();
 }

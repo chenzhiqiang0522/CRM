@@ -173,4 +173,18 @@ public class OperateMenuController {
         }
     }
 
+    @GetMapping(value = "/treeAllMenus")
+    @Authority(name = "treeAllMenus",descs = "获取全部菜单树")
+    @ApiOperation(value = "获取全部菜单树")
+    public ReturnResult treeAllMenus(){
+        try {
+            List<OperateMenu> operateMenus = operateMenuImpl.treeAllMenus();
+            returnResult.setResultObj(operateMenus);
+            return returnResult;
+        } catch (Exception e) {
+            errorMethod(e,returnResult);
+            return returnResult;
+        }
+    }
+
 }

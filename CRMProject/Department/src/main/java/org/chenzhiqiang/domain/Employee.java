@@ -16,6 +16,7 @@ public class Employee {
     private String headImage;
     private Integer age;
     private Long departmentId;
+    private String parentDepartmentName;
 
     public Employee(String username, String password, String email, String headImage, Integer age, Long departmentId) {
         this.username = username;

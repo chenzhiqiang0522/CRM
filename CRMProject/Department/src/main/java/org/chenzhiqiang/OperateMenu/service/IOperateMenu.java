@@ -24,4 +24,5 @@ public interface IOperateMenu {
     Integer deleteRoleMenu(Long id);
     Integer addRoleMenu(Long employeeId,List<Long> ids);
     List<Long> getRoleMenu(Long id);
+    List<OperateMenu> treeAllMenus();
 }

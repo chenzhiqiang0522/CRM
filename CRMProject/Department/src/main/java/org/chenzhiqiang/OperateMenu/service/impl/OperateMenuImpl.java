@@ -85,4 +85,10 @@ public class OperateMenuImpl implements IOperateMenu {
         return roleMenu;
     }
 
+    @Override
+    public List<OperateMenu> treeAllMenus() {
+        List<OperateMenu> operateMenus = operateMenuMapper.treeAllMenus();
+        return operateMenus;
+    }
+
 }

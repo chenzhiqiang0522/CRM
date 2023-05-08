@@ -111,4 +111,16 @@
     <select id="getRoleMenu" resultType="java.lang.Long">
         select menu_id from t_auth_role_menu where role_id = #{id}
     </select>
+    <select id="treeAllMenus" resultMap="OperateMenuMap">
+        SELECT
+            p.*,
+            c.id AS cid,
+            c.NAME AS cname,
+            c.url AS curl
+        FROM
+            t_auth_menu p
+                LEFT JOIN t_auth_menu c ON p.id = c.parent_id
+        WHERE
+            p.parent_id IS NULL
+    </select>
 </mapper>

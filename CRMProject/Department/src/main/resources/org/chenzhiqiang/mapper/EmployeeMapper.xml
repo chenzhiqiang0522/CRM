@@ -46,11 +46,24 @@
         <result property="headImage" column="headImage"/>
         <result property="age" column="age"/>
         <result property="departmentId" column="department_id"/>
+        <result property="parentDepartmentName" column="pname" />
     </resultMap>
     <select id="selectAll" resultMap="employeeResultMap">
+<!--        SELECT-->
+<!--        <include refid="employeeColumns"/>-->
+<!--        FROM t_org_employee-->
         SELECT
-        <include refid="employeeColumns"/>
-        FROM t_org_employee
+        e.`username`,
+        e.`password`,
+        e.`id`,
+        e.`headImage`,
+        e.`email`,
+        e.`department_id`,
+        e.`age`,
+        d.NAME as pname
+        FROM
+        t_org_employee e
+        JOIN t_org_department d ON e.department_id = d.id
     </select>
     <sql id="whereCondition">
         <where>
@@ -60,10 +73,18 @@
         </where>
     </sql>
     <select id="selectByQueryObj" resultMap="employeeResultMap">
-        select
-        <include refid="employeeColumns"/>
-        from t_org_employee
-        <include refid="whereCondition"/>
+        SELECT
+            e.`username`,
+            e.`password`,
+            e.`id`,
+            e.`headImage`,
+            e.`email`,
+            e.`department_id`,
+            e.`age`,
+            d.NAME as pname
+        FROM
+            t_org_employee e
+                JOIN t_org_department d ON e.department_id = d.id
         limit #{start},#{pageSize}
     </select>
     <select id="selectAllByUsername" resultType="Employee">
