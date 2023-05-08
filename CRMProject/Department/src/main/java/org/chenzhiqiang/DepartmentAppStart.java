@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @MapperScan({"org.chenzhiqiang.mapper", "org.chenzhiqiang.authority.mapper",
-        "org.chenzhiqiang.OperateMenu.mapper", "org.chenzhiqiang.login.mapper", "org.chenzhiqiang.sys.mapper"})
+        "org.chenzhiqiang.OperateMenu.mapper", "org.chenzhiqiang.login.mapper"})
 @ServletComponentScan("org.chenzhiqiang.authority.listener")
 //@ServletComponentScan(basePackages = "org.chenzhiqiang.authority.linstener")
 public class DepartmentAppStart implements WebMvcConfigurer {
@@ -38,3 +38,4 @@ public class DepartmentAppStart implements WebMvcConfigurer {
         SpringApplication.run(DepartmentAppStart.class,args);
     }
 }
+
