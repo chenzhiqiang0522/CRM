@@ -3,6 +3,7 @@ package org.chenzhiqiang.OperateMenu.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.chenzhiqiang.OperateMenu.domain.OperateMenu;
+import org.chenzhiqiang.OperateMenu.dto.RoleMenuDTO;
 import org.chenzhiqiang.OperateMenu.service.IOperateMenu;
 import org.chenzhiqiang.authority.annotation.Authority;
 import org.chenzhiqiang.domain.Employee;
@@ -41,7 +42,7 @@ public class OperateMenuController {
         return r;
     }
 
-    @RequestMapping
+    @GetMapping
     @ApiOperation(value = "获取菜单")
     @Authority(name = "获取菜单",descs = "获取菜单")
     public ReturnResult getAll(){
@@ -135,6 +136,36 @@ public class OperateMenuController {
         try {
             List<OperateMenu> tree = operateMenuImpl.tree(loginUserId);
             returnResult.setResultObj(tree);
+            return returnResult;
+        } catch (Exception e) {
+            errorMethod(e,returnResult);
+            return returnResult;
+        }
+    }
+
+    @PostMapping(value = "/setRoleMenu")
+    @ApiOperation(value = "设置菜单")
+    @Authority(name = "设置菜单",descs = "设置菜单")
+    public ReturnResult setRoleMenu(@RequestBody RoleMenuDTO roleMenuDTO){
+        try {
+            Integer deleteRowNum = operateMenuImpl.deleteRoleMenu(roleMenuDTO.getEmployeeId());
+            System.out.println("删除了"+deleteRowNum+"行数据");
+            Integer addRowNums = operateMenuImpl.addRoleMenu(roleMenuDTO.getEmployeeId(), roleMenuDTO.getMenuIds());
+            System.out.println("添加了"+addRowNums+"行数据");
+            return returnResult;
+        } catch (Exception e) {
+            errorMethod(e,returnResult);
+            return returnResult;
+        }
+    }
+
+    @GetMapping(value = "/getRoleMenu/{id}")
+    @Authority(name = "getRoleMenu",descs = "获取当前角色的菜单")
+    @ApiOperation(value = "获取当前角色的菜单")
+    public ReturnResult getRoleMenu(@PathVariable Long id){
+        try {
+            List<Long> roleMenu = operateMenuImpl.getRoleMenu(id);
+            returnResult.setResultObj(roleMenu);
             return returnResult;
         } catch (Exception e) {
             errorMethod(e,returnResult);

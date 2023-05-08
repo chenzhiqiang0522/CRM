@@ -66,4 +66,23 @@ public class OperateMenuImpl implements IOperateMenu {
         List<OperateMenu> tree = operateMenuMapper.tree(loginUserId);
         return tree;
     }
+
+    @Override
+    public Integer deleteRoleMenu(Long id) {
+        Integer integer = operateMenuMapper.deleteRoleMenu(id);
+        return integer;
+    }
+
+    @Override
+    public Integer addRoleMenu(Long employeeId, List<Long> ids) {
+        Integer integer = operateMenuMapper.addRoleMenu(employeeId, ids);
+        return integer;
+    }
+
+    @Override
+    public List<Long> getRoleMenu(Long id) {
+        List<Long> roleMenu = operateMenuMapper.getRoleMenu(id);
+        return roleMenu;
+    }
+
 }

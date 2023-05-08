@@ -17,22 +17,22 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
         "org.chenzhiqiang.OperateMenu.mapper", "org.chenzhiqiang.login.mapper", "org.chenzhiqiang.sys.mapper"})
 @ServletComponentScan("org.chenzhiqiang.authority.listener")
 //@ServletComponentScan(basePackages = "org.chenzhiqiang.authority.linstener")
-//public class DepartmentAppStart implements WebMvcConfigurer {
-public class DepartmentAppStart{
-//    @Autowired
-//    private LoginInterceptor loginInterceptor;
-//
-//    @Autowired
-//    private AuthorityInterceptor authorityInterceptor;
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(loginInterceptor)
-//                .addPathPatterns("/**")
-//                .excludePathPatterns("/login","/logout",","/OperateMenu/tree/");
-//        registry.addInterceptor(authorityInterceptor)
-//                .addPathPatterns("/**")
-//                .excludePathPatterns("/login","/logout","/OperateMenu/tree/");
-//    }
+public class DepartmentAppStart implements WebMvcConfigurer {
+//public class DepartmentAppStart{
+    @Autowired
+    private LoginInterceptor loginInterceptor;
+
+    @Autowired
+    private AuthorityInterceptor authorityInterceptor;
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/login","/logout","/OperateMenu/tree/");
+        registry.addInterceptor(authorityInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/login","/logout","/OperateMenu/tree/");
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(DepartmentAppStart.class,args);

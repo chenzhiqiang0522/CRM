@@ -31,6 +31,12 @@
                 #{icon},
                 #{parentId});
     </insert>
+    <insert id="addRoleMenu">
+        insert into t_auth_role_menu(role_id, menu_id) values
+        <foreach collection="menuIds" item="menuId" separator=",">
+            (#{employeeId},#{menuId})
+        </foreach>
+    </insert>
     <update id="modifyOperateMenu">
         update t_auth_menu
         set name = #{name},
@@ -51,6 +57,9 @@
         <foreach collection="list" separator="," open="(" close=")" item="id">
             #{id}
         </foreach>
+    </delete>
+    <delete id="deleteRoleMenu">
+        delete from t_auth_role_menu where role_id = #{id}
     </delete>
     <select id="selectAll" resultMap="OperateMenuMap">
         select
@@ -98,5 +107,8 @@
         WHERE
             er.employee_id = #{loginUserId}
           AND p.parent_id IS NULL
+    </select>
+    <select id="getRoleMenu" resultType="java.lang.Long">
+        select menu_id from t_auth_role_menu where role_id = #{id}
     </select>
 </mapper>

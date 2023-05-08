@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.chenzhiqiang.authority.annotation.Authority;
 import org.chenzhiqiang.domain.Employee;
+import org.chenzhiqiang.dto.EmployeeRoleDTO;
 import org.chenzhiqiang.services.impl.EmployeeServiceImpl;
 import org.chenzhiqiang.utils.PageList;
 import org.chenzhiqiang.utils.QueryObj;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/Employees")
@@ -121,5 +123,37 @@ public class EmployeeController {
             return returnResult;
         }
 
+    }
+
+    @PostMapping(value = "/addRoleToEmplyee")
+    @ApiOperation(value = "设置员工角色")
+    @Authority(name = "设置员工角色",descs = "设置员工角色")
+    public ReturnResult addRoleToEmplyee(@RequestBody EmployeeRoleDTO employeeRoleDTO){
+        try {
+            Long roleByEmployeeId = employeeService.getRoleByEmployeeId(employeeRoleDTO.getEmployeeId());
+            if (Objects.isNull(roleByEmployeeId)) {
+                Integer integer = employeeService.addRoleToEmplyee(employeeRoleDTO);
+            } else {
+                Integer integer = employeeService.modifyRoleOfEmployee(employeeRoleDTO);
+            }
+            return returnResult;
+        } catch (Exception e) {
+            errorMethod(e,returnResult);
+            return returnResult;
+        }
+    }
+
+    @GetMapping(value = "/getRoleByEmployeeId/{id}")
+    @ApiOperation(value = "获取员工角色id")
+    @Authority(name = "获取员工角色id",descs = "获取员工角色id")
+    public ReturnResult getRoleByEmployeeId(@PathVariable Long id){
+        try {
+            Long roleId = employeeService.getRoleByEmployeeId(id);
+            returnResult.setResultObj(roleId);
+            return returnResult;
+        } catch (Exception e) {
+            errorMethod(e,returnResult);
+            return returnResult;
+        }
     }
 }

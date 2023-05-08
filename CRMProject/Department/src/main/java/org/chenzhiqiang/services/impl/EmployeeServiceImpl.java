@@ -1,6 +1,7 @@
 package org.chenzhiqiang.services.impl;
 
 import org.chenzhiqiang.domain.Employee;
+import org.chenzhiqiang.dto.EmployeeRoleDTO;
 import org.chenzhiqiang.mapper.EmployeeMapper;
 import org.chenzhiqiang.services.IEmployeeService;
 import org.chenzhiqiang.utils.QueryObj;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional(readOnly = true,propagation = Propagation.SUPPORTS)
@@ -54,5 +56,23 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public Integer modifyEmployee(Employee employee) {
         Integer changeRowNum = employeeMapper.modifyEmployee(employee);
         return changeRowNum;
+    }
+
+    @Override
+    public Integer addRoleToEmplyee(EmployeeRoleDTO employeeRoleDTO) {
+        Integer addRowNum = employeeMapper.addRoleToEmplyee(employeeRoleDTO);
+        return addRowNum;
+    }
+
+    @Override
+    public Long getRoleByEmployeeId(Long id) {
+        Long roleByEmployeeId = employeeMapper.getRoleByEmployeeId(id);
+        return roleByEmployeeId;
+    }
+
+    @Override
+    public Integer modifyRoleOfEmployee(EmployeeRoleDTO employeeRoleDTO) {
+        Integer changRowNum = employeeMapper.modifyRoleOfEmployee(employeeRoleDTO);
+        return changRowNum;
     }
 }

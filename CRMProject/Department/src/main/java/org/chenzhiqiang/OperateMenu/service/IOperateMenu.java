@@ -1,5 +1,6 @@
 package org.chenzhiqiang.OperateMenu.service;
 
+import io.swagger.models.auth.In;
 import org.chenzhiqiang.OperateMenu.domain.OperateMenu;
 import org.chenzhiqiang.domain.Department;
 import org.chenzhiqiang.domain.DepartmentQueryObject;
@@ -20,4 +21,7 @@ public interface IOperateMenu {
     Integer patchDeleteOperateMenus(ArrayList<Long> ids);
 
     List<OperateMenu> tree(Long loginUserId);
+    Integer deleteRoleMenu(Long id);
+    Integer addRoleMenu(Long employeeId,List<Long> ids);
+    List<Long> getRoleMenu(Long id);
 }

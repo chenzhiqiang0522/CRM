@@ -1,6 +1,8 @@
 package org.chenzhiqiang.OperateMenu.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.chenzhiqiang.OperateMenu.domain.OperateMenu;
+import org.chenzhiqiang.OperateMenu.dto.RoleMenuDTO;
 import org.chenzhiqiang.domain.Department;
 import org.chenzhiqiang.utils.QueryObj;
 import org.springframework.stereotype.Repository;
@@ -25,4 +27,8 @@ public interface OperateMenuMapper {
 
     Integer patchDeleteDepartments(ArrayList<Long> ids);
     List<OperateMenu> tree(Long loginUserId);
+
+    Integer deleteRoleMenu(Long id);
+    Integer addRoleMenu(@Param("employeeId") Long employeeId, @Param("menuIds")List<Long> menuIds);
+    List<Long> getRoleMenu(Long id);
 }

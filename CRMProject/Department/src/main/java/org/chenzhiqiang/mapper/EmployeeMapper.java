@@ -1,6 +1,7 @@
 package org.chenzhiqiang.mapper;
 
 import org.chenzhiqiang.domain.Employee;
+import org.chenzhiqiang.dto.EmployeeRoleDTO;
 import org.chenzhiqiang.utils.QueryObj;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +18,8 @@ public interface EmployeeMapper {
     Long addEmployee(Employee employee);
     List<Employee> selectByQueryObj(QueryObj queryObj);
 
+    Integer addRoleToEmplyee(EmployeeRoleDTO employeeRoleDTO);
+
+    Long getRoleByEmployeeId(Long id);
+    Integer modifyRoleOfEmployee(EmployeeRoleDTO employeeRoleDTO);
 }
