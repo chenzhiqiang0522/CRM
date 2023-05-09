@@ -7,7 +7,7 @@ target/
 .idea
 .idea
 .idea
-.idea
+**/.idea
 *.iws
 *.iml
 *.ipr
