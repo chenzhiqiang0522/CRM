@@ -3,13 +3,14 @@ package ${package.Entity};
 import java.math.BigDecimal;
 import java.util.Date;
 import org.chenzhiqiang.basic.doamin.BaseDomain;
-#if(${entityLombokModel})
-
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+#if(${entityLombokModel})
+
+
+
 import lombok.experimental.Accessors;
 #end
 
@@ -21,13 +22,10 @@ import lombok.experimental.Accessors;
  * @author ${author}
  * @since ${date}
  */
-#if(${entityLombokModel})
+
 @Data
-#if(${superEntityClass})
-@EqualsAndHashCode(callSuper = true)
-#end
-@Accessors(chain = true)
-#end
+@AllArgsConstructor
+@NoArgsConstructor
 #if(${superEntityClass})
 public class ${entity} extends ${superEntityClass}{
 #elseif(${activeRecord})
@@ -60,7 +58,7 @@ public class ${entity} implements Serializable {
 #end
 ## ----------  END 字段循环遍历  ----------
 
-#if(!${entityLombokModel})
+#*#if(!${entityLombokModel})
 #foreach($field in ${table.fields})
 #if(${field.propertyType.equals("boolean")})
 #set($getprefix="is")
@@ -104,5 +102,5 @@ public class ${entity} implements Serializable {
 #end
         "}";
     }
-#end
+#end*#
 }

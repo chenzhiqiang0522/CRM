@@ -29,7 +29,7 @@ public class ${entity}Controller {
         ReturnResult returnResult = new ReturnResult();
         try {
             if( ${table.entityPath}.getId()!=null)
-                ${table.entityPath}Service.modify(${table.entityPath});
+                ${table.entityPath}Service.update(${table.entityPath});
             else
                 ${table.entityPath}Service.add(${table.entityPath});
             return returnResult;
@@ -46,7 +46,7 @@ public class ${entity}Controller {
     public ReturnResult deleteById(@PathVariable("id") Long id){
         ReturnResult returnResult = new ReturnResult();
         try {
-            ${table.entityPath}Service.del(id);
+            ${table.entityPath}Service.removeById(id);
             return returnResult;
         } catch (Exception e) {
             return errorMethod(e, returnResult);
@@ -88,7 +88,7 @@ public class ${entity}Controller {
     public ReturnResult pageList(@RequestBody QueryObj queryObj) {
         ReturnResult returnResult = new ReturnResult();
         try {
-            PageList<${entity}> pageList = ${table.entityPath}Service.queryPage(queryObj);
+            PageList<${entity}> pageList = ${table.entityPath}Service.pageList(queryObj);
             returnResult.setResultObj(pageList);
             return returnResult;
         } catch (Exception e) {

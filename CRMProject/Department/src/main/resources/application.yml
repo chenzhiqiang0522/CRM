@@ -5,12 +5,13 @@ spring:
     name: ronghua-crm
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql:///crm?serverTimezone=UTC
+    url: jdbc:mysql:///ronghuanet-crm?serverTimezone=UTC
     username: root
     password: 123456
 mybatis:
   type-aliases-package: org.chenzhiqiang.domain,org.chenzhiqiang.authority.domain,
-                        org.chenzhiqiang.OperateMenu.domain,org.chenzhiqiang.sys.domain
+                        org.chenzhiqiang.OperateMenu.domain,org.chenzhiqiang.sys.domain,
+                        org.chenzhiqiang.product.domain,org.chenzhiqiang.product.query
 #  配置扫描权限注解的包位置
 authority:
   package: org.chenzhiqiang.controller,org.chenzhiqiang.authority.controller,org.chenzhiqiang.OperateMenu.controller

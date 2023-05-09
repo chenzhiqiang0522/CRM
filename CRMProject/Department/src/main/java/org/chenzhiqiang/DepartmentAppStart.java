@@ -14,7 +14,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @MapperScan({"org.chenzhiqiang.mapper", "org.chenzhiqiang.authority.mapper",
-        "org.chenzhiqiang.OperateMenu.mapper", "org.chenzhiqiang.login.mapper"})
+        "org.chenzhiqiang.OperateMenu.mapper", "org.chenzhiqiang.login.mapper",
+        "org.chenzhiqiang.product.mapper"})
 @ServletComponentScan("org.chenzhiqiang.authority.listener")
 //@ServletComponentScan(basePackages = "org.chenzhiqiang.authority.linstener")
 //public class DepartmentAppStart implements WebMvcConfigurer {

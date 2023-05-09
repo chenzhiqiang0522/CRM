@@ -40,13 +40,13 @@ public class GenteratorCode {
         mpg.setDataSource(dsc);
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setTablePrefix(new String[] { "t_sys_" });// 此处可以修改为您的表前缀
+        strategy.setTablePrefix(new String[] { "t_prod_" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[]{"t_sys_config","t_sys_dictionary","t_sys_dictionaryitem"}); // 需要生成的表
+        strategy.setInclude(new String[]{"t_prod_product","t_prod_product_type",}); // 需要生成的表
         strategy.setSuperEntityClass("org.chenzhiqiang.basic.doamin.BaseDomain");
-        strategy.setSuperServiceClass("org.chenzhiqiang.basic.doamin.IBaseService");
-        strategy.setSuperServiceImplClass("org.chenzhiqiang.basic.doamin.service.impl.BaseServiceImpl");
-        strategy.setSuperMapperClass("org.chenzhiqiang.basic.doamin.mapper.BaseMapper");
+        strategy.setSuperServiceClass("org.chenzhiqiang.basic.service.IBaseService");
+        strategy.setSuperServiceImplClass("org.chenzhiqiang.basic.service.impl.BaseServiceImpl");
+        strategy.setSuperMapperClass("org.chenzhiqiang.basic.mapper.BaseMapper");
         mpg.setStrategy(strategy);
         // 包配置
         PackageConfig pc = new PackageConfig();
