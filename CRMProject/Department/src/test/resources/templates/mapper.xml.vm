@@ -48,12 +48,12 @@
         where id = #{id}
     </update>
     <!--加载对象-->
-    <select id="loadById" resultType="${entity}" parameterType="long">
+    <select id="loadById" resultMap="BaseResultMap" parameterType="long">
         select *
         from ${table.name} where id = #{id}
     </select>
     <!--加载所有对象-->
-    <select id="loadAll" resultType="${entity}">
+    <select id="loadAll" resultMap="BaseResultMap" >
         select *
         from ${table.name}
     </select>
@@ -63,7 +63,7 @@
         <include refid="whereSql"/>
     </select>
     <!--//查询当前页数据=参数（查询对象），返回值:List-->
-    <select id="queryData" parameterType="${entity}Query" resultType="${entity}">
+    <select id="queryData" parameterType="${entity}Query" resultMap="BaseResultMap">
         select * from ${table.name}
         <include refid="whereSql"/>
         limit #{start},#{pageSize}
