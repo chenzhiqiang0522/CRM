@@ -2,10 +2,10 @@ server:
   port: 8081
 spring:
   application:
-    name: ronghua-crm
+    name: ronghua-car
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql:///ronghuanet-crm?serverTimezone=UTC
+    url: jdbc:mysql:///ronghuanet_car?serverTimezone=UTC
     username: root
     password: 123456
 mybatis:
